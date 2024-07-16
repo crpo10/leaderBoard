@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:leaderboard/src/providers/change_location_provider.dart';
+import 'package:leaderboard/src/providers/data_controller.dart';
 import 'package:leaderboard/src/widgets/leader_character.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class _TopSideLeaderboardState extends State<TopSideLeaderboard> {
     final size = MediaQuery.of(context).size;
 
     final location = Provider.of<ChangeLocationProvider>(context);
+    final dataController = Provider.of<DataController>(context);
 
     return SizedBox(
       width: size.width,
@@ -64,15 +66,18 @@ class _TopSideLeaderboardState extends State<TopSideLeaderboard> {
           Column(
             children: [
               Gap(size.height * 0.06),
-              const LeaderCharacter(),
+              LeaderCharacter(
+                source: dataController.firstSources[1],
+              ),
             ],
           ),
           Gap(size.width * 0.05),
           Column(
             children: [
               Gap(size.height * 0.04),
-              const LeaderCharacter(
+              LeaderCharacter(
                 first: true,
+                source: dataController.firstSources[0],
               ),
             ],
           ),
@@ -80,7 +85,9 @@ class _TopSideLeaderboardState extends State<TopSideLeaderboard> {
           Column(
             children: [
               Gap(size.height * 0.06),
-              const LeaderCharacter(),
+              LeaderCharacter(
+                source: dataController.firstSources[2],
+              ),
             ],
           ),
           const Spacer(),

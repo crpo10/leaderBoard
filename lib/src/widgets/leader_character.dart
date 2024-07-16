@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:leaderboard/src/models/source_model.dart';
 import 'package:leaderboard/src/widgets/crown_widget.dart';
 
 class LeaderCharacter extends StatelessWidget {
   const LeaderCharacter({
     super.key,
     this.first = false,
+    required this.source,
   });
 
   final bool first;
+  final SourceModel source;
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +60,14 @@ class LeaderCharacter extends StatelessWidget {
                   width: size.width * 0.25,
                   child: FirstPlaceName(
                     size: size,
+                    name: source.fullName,
                   ),
                 )
               : Container(
                   margin: const EdgeInsets.all(5),
                   width: size.width * 0.25,
                   child: Text(
-                    'Username Lastname',
+                    source.fullName,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -83,7 +87,7 @@ class LeaderCharacter extends StatelessWidget {
                 ),
               ),
               Text(
-                '20',
+                source.month,
                 style: TextStyle(
                   fontSize: size.height * 0.025,
                   color: Colors.white,
@@ -100,7 +104,9 @@ class LeaderCharacter extends StatelessWidget {
 class FirstPlaceName extends StatefulWidget {
   final Size size;
 
-  const FirstPlaceName({Key? key, required this.size}) : super(key: key);
+  final String name;
+
+  const FirstPlaceName({super.key, required this.size, required this.name});
 
   @override
   _FirstPlaceNameState createState() => _FirstPlaceNameState();
@@ -154,7 +160,7 @@ class _FirstPlaceNameState extends State<FirstPlaceName>
               ).createShader(bounds);
             },
             child: Text(
-              'Rafael Gomez',
+              widget.name,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors
@@ -165,50 +171,50 @@ class _FirstPlaceNameState extends State<FirstPlaceName>
             ),
           ),
         ),
-        Positioned(
-          top: 5,
-          right: 80,
-          child: AnimatedBuilder(
-            animation: _floatAnimation2,
-            builder: (context, child) {
-              return Transform.translate(
-                offset: Offset(0, _floatAnimation2.value),
-                child: child,
-              );
-            },
-            child: SizedBox(
-              width: 10,
-              height: 10,
-              child: SvgPicture.asset(
-                'assets/star-solid.svg',
-                colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 10,
-          left: 70,
-          child: AnimatedBuilder(
-            animation: _floatAnimation,
-            builder: (context, child) {
-              return Transform.translate(
-                offset: Offset(0, _floatAnimation.value),
-                child: child,
-              );
-            },
-            child: SizedBox(
-              width: 10,
-              height: 10,
-              child: SvgPicture.asset(
-                'assets/star-solid.svg',
-                colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-              ),
-            ),
-          ),
-        ),
+        // Positioned(
+        //   top: 5,
+        //   right: 80,
+        //   child: AnimatedBuilder(
+        //     animation: _floatAnimation2,
+        //     builder: (context, child) {
+        //       return Transform.translate(
+        //         offset: Offset(0, _floatAnimation2.value),
+        //         child: child,
+        //       );
+        //     },
+        //     child: SizedBox(
+        //       width: 10,
+        //       height: 10,
+        //       child: SvgPicture.asset(
+        //         'assets/star-solid.svg',
+        //         colorFilter:
+        //             const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        // Positioned(
+        //   top: 10,
+        //   left: 70,
+        //   child: AnimatedBuilder(
+        //     animation: _floatAnimation,
+        //     builder: (context, child) {
+        //       return Transform.translate(
+        //         offset: Offset(0, _floatAnimation.value),
+        //         child: child,
+        //       );
+        //     },
+        //     child: SizedBox(
+        //       width: 10,
+        //       height: 10,
+        //       child: SvgPicture.asset(
+        //         'assets/star-solid.svg',
+        //         colorFilter:
+        //             const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

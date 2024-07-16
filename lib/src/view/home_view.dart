@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:leaderboard/src/providers/data_controller.dart';
 import 'package:leaderboard/src/widgets/botton_side_leaderboard.dart';
 import 'package:leaderboard/src/widgets/top_side_leaderboard.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -15,6 +17,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    Future.microtask(() => Provider.of<DataController>(context, listen: false)
+        .assignDataToEachList());
 
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.03),
@@ -47,7 +52,7 @@ class HomeView extends StatelessWidget {
                           width: size.width,
                           height: size.height,
                           color: Colors.white,
-                          child: Center(
+                          child: const Center(
                             child: CircularProgressIndicator(),
                           ),
                         );

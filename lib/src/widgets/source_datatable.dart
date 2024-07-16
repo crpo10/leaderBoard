@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:leaderboard/src/data/source_static_data.dart';
 import 'package:leaderboard/src/models/source_model.dart';
 
 class SourceDataTable extends StatelessWidget {
-  const SourceDataTable({super.key});
+  const SourceDataTable({super.key, required this.sourcesData});
+
+  final List<SourceModel> sourcesData;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class SourceDataTable extends StatelessWidget {
           ),
         ),
       ],
-      rows: _sourceStaticData(sources, size),
+      rows: _sourceStaticData(sourcesData, size),
     );
   }
 

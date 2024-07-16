@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leaderboard/src/providers/change_location_provider.dart';
+import 'package:leaderboard/src/providers/data_controller.dart';
 import 'package:leaderboard/src/view/home_view.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ChangeLocationProvider>(
           create: (BuildContext context) => ChangeLocationProvider(),
-        )
+        ),
+        ChangeNotifierProvider<DataController>(
+          create: (BuildContext context) => DataController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
