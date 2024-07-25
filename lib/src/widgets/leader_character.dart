@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:leaderboard/src/models/source_model.dart';
+import 'package:leaderboard/src/models/sources_model.dart';
 import 'package:leaderboard/src/widgets/crown_widget.dart';
 
 class LeaderCharacter extends StatelessWidget {
@@ -60,14 +61,14 @@ class LeaderCharacter extends StatelessWidget {
                   width: size.width * 0.25,
                   child: FirstPlaceName(
                     size: size,
-                    name: source.fullName,
+                    name: source.sourceName,
                   ),
                 )
               : Container(
                   margin: const EdgeInsets.all(5),
                   width: size.width * 0.25,
                   child: Text(
-                    source.fullName,
+                    source.sourceName,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -87,7 +88,7 @@ class LeaderCharacter extends StatelessWidget {
                 ),
               ),
               Text(
-                source.month,
+                source.leadCount.toString(),
                 style: TextStyle(
                   fontSize: size.height * 0.025,
                   color: Colors.white,

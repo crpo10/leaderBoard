@@ -1,4 +1,4 @@
-class SourceModel {
+class SourceModelStatic {
   final String id;
   final String fullName;
   final String month;
@@ -7,7 +7,7 @@ class SourceModel {
   final String week3;
   final String week4;
 
-  SourceModel({
+  SourceModelStatic({
     required this.id,
     required this.fullName,
     required this.month,
@@ -16,4 +16,6 @@ class SourceModel {
     required this.week3,
     required this.week4,
   });
+
+  static fromJson(json) {}
 }

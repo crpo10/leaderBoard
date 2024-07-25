@@ -1,9 +1,14 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:leaderboard/src/data/source_static_data.dart';
 import 'package:leaderboard/src/models/source_model.dart';
+import 'package:leaderboard/src/models/sources_model.dart';
 
 class DataController with ChangeNotifier {
-  List<SourceModel> allSources = sources;
+  final _dio = Dio();
+  List<SourceModel> allSources = [];
 
   final List<SourceModel> _firstSources = [];
   final List<SourceModel> _secondSources = [];
@@ -22,9 +27,34 @@ class DataController with ChangeNotifier {
       _secondSources.addAll(allSources.sublist(8));
     }
 
-    print(_firstSources);
+    print("First Source  $_firstSources");
     print(_secondSources);
 
-    notifyListeners();
+    // notifyListeners();
+  }
+
+  Future<List<SourceModel>> getSources() async {
+    try {
+      final response = await _dio.post('http://localhost:3000/sources/filter/',
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIxOTIzNTczLCJleHAiOjE3MjIwMDk5NzN9.1gy-MSzVQUdZRQYwRNTxdQq7oC6fVQllMyONv76lG1E'
+            },
+          ),
+          data: {
+            "startDate": "2024/06/01",
+            "endDate": "2024/07/30",
+            "officeId": 1
+          });
+
+      allSources = sourcesFromJson(jsonEncode(response.data));
+      assignDataToEachList();
+      // print(allSources);
+      return allSources;
+    } on DioException catch (e) {
+      print(e.response);
+      return [];
+    }
   }
 }

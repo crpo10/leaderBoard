@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaderboard/src/models/source_model.dart';
+import 'package:leaderboard/src/models/sources_model.dart';
 
 class SourceDataTable extends StatelessWidget {
   const SourceDataTable({super.key, required this.sourcesData});
@@ -15,7 +16,7 @@ class SourceDataTable extends StatelessWidget {
         DataColumn(
           label: Expanded(
             child: Text(
-              'ID',
+              'Place',
               style:
                   TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
             ),
@@ -24,7 +25,7 @@ class SourceDataTable extends StatelessWidget {
         DataColumn(
           label: Expanded(
             child: Text(
-              'Name',
+              'Photo',
               style:
                   TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
             ),
@@ -33,7 +34,7 @@ class SourceDataTable extends StatelessWidget {
         DataColumn(
           label: Expanded(
             child: Text(
-              'July',
+              'name',
               style:
                   TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
             ),
@@ -42,7 +43,7 @@ class SourceDataTable extends StatelessWidget {
         DataColumn(
           label: Expanded(
             child: Text(
-              'week1',
+              'Position',
               style:
                   TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
             ),
@@ -51,25 +52,7 @@ class SourceDataTable extends StatelessWidget {
         DataColumn(
           label: Expanded(
             child: Text(
-              'week2',
-              style:
-                  TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'week3',
-              style:
-                  TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'week4',
+              'Leads',
               style:
                   TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
             ),
@@ -83,42 +66,45 @@ class SourceDataTable extends StatelessWidget {
   List<DataRow> _sourceStaticData(List<SourceModel> sources, Size size) {
     List<DataRow> data = [];
 
-    for (var source in sources) {
+    for (var i = 0; i < sources.length; i++) {
+      var source = sources[i];
       data.add(
         DataRow(
           cells: [
+            DataCell(
+              Text(
+                source.place.toString(),
+                style: TextStyle(
+                    color: Colors.white, fontSize: size.height * 0.02),
+              ),
+            ),
+            DataCell(
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: SizedBox(
+                  width: size.width * 0.05,
+                  child: Image.asset(
+                    'assets/no_user.png',
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
             DataCell(Text(
-              source.id,
+              source.sourceName,
               style:
                   TextStyle(color: Colors.white, fontSize: size.height * 0.02),
             )),
             DataCell(Text(
-              source.fullName,
+              // source.week1,
+              source.position.name,
               style:
                   TextStyle(color: Colors.white, fontSize: size.height * 0.02),
             )),
             DataCell(Text(
-              source.month,
-              style:
-                  TextStyle(color: Colors.white, fontSize: size.height * 0.02),
-            )),
-            DataCell(Text(
-              source.week1,
-              style:
-                  TextStyle(color: Colors.white, fontSize: size.height * 0.02),
-            )),
-            DataCell(Text(
-              source.week2,
-              style:
-                  TextStyle(color: Colors.white, fontSize: size.height * 0.02),
-            )),
-            DataCell(Text(
-              source.week3,
-              style:
-                  TextStyle(color: Colors.white, fontSize: size.height * 0.02),
-            )),
-            DataCell(Text(
-              source.week4,
+              // source.week2,
+              source.leadCount.toString(),
               style:
                   TextStyle(color: Colors.white, fontSize: size.height * 0.02),
             )),
