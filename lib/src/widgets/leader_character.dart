@@ -21,13 +21,6 @@ class LeaderCharacter extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        // boxShadow: const [
-        //   BoxShadow(
-        //     color: Colors.black12,
-        //     offset: Offset(0, 10),
-        //     blurRadius: 10,
-        //   )
-        // ],
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
       ),

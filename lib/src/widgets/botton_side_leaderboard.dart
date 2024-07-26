@@ -65,7 +65,7 @@ class _LastSourcesWidgetState extends State<LastSourcesWidget>
     _scrollController = ScrollController();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 22),
     );
 
     _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(

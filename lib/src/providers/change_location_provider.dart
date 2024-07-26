@@ -5,13 +5,13 @@ class ChangeLocationProvider with ChangeNotifier {
     'TPIH Global',
     'TPIH Miami',
     'TPIH Orlando',
-    'TPIH Texas',
-    'TPIH Georgia',
   ];
 
   int _currentIndex = 0;
 
   String get location => locations[_currentIndex];
+
+  int get locationId => _currentIndex;
 
   void nextLocation() {
     if (_currentIndex < locations.length - 1) {

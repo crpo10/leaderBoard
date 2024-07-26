@@ -29,11 +29,9 @@ class DataController with ChangeNotifier {
 
     print("First Source  $_firstSources");
     print(_secondSources);
-
-    // notifyListeners();
   }
 
-  Future<List<SourceModel>> getSources() async {
+  Future<List<SourceModel>> getSources(int officeID) async {
     try {
       final response = await _dio.post('http://localhost:3000/sources/filter/',
           options: Options(
@@ -45,12 +43,11 @@ class DataController with ChangeNotifier {
           data: {
             "startDate": "2024/06/01",
             "endDate": "2024/07/30",
-            "officeId": 1
+            "officeId": officeID
           });
 
       allSources = sourcesFromJson(jsonEncode(response.data));
       assignDataToEachList();
-      // print(allSources);
       return allSources;
     } on DioException catch (e) {
       print(e.response);

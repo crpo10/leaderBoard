@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leaderboard/src/models/source_model.dart';
 import 'package:leaderboard/src/models/sources_model.dart';
 
 class SourceDataTable extends StatelessWidget {
@@ -12,6 +11,8 @@ class SourceDataTable extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return DataTable(
+      horizontalMargin: 0,
+      dividerThickness: 0.5,
       columns: const <DataColumn>[
         DataColumn(
           label: Expanded(
@@ -91,11 +92,13 @@ class SourceDataTable extends StatelessWidget {
                 ),
               ),
             ),
-            DataCell(Text(
-              source.sourceName,
-              style:
-                  TextStyle(color: Colors.white, fontSize: size.height * 0.02),
-            )),
+            DataCell(
+              Text(
+                source.sourceName,
+                style: TextStyle(
+                    color: Colors.white, fontSize: size.height * 0.02),
+              ),
+            ),
             DataCell(Text(
               // source.week1,
               source.position.name,

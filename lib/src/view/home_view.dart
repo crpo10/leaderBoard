@@ -1,4 +1,8 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:leaderboard/src/login/login_view.dart';
+import 'package:leaderboard/src/login/provider/login_provider.dart';
+import 'package:leaderboard/src/providers/change_location_provider.dart';
 import 'package:leaderboard/src/providers/data_controller.dart';
 import 'package:leaderboard/src/widgets/botton_side_leaderboard.dart';
 import 'package:leaderboard/src/widgets/top_side_leaderboard.dart';
@@ -11,77 +15,79 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final sourceProvider = Provider.of<DataController>(context);
+    final locationProvider = Provider.of<ChangeLocationProvider>(context);
+    final loginProvider = Provider.of<LoginProvider>(context);
     // Future.microtask(
     //     () => Provider.of<DataController>(context, listen: false).getSources());
 
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.03),
-      body: FutureBuilder(
-        future: sourceProvider.getSources(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('Error loading data'),
-            );
-          } else {
-            return Stack(
-              children: [
-                SizedBox(
-                  height: size.height,
-                  width: size.width,
-                  child: Image.asset(
-                    'assets/i_w_4.png',
-                    fit: BoxFit.cover,
-                    frameBuilder: (BuildContext context, Widget child,
-                        int? frame, bool wasSynchronouslyLoaded) {
-                      if (wasSynchronouslyLoaded || frame != null) {
-                        return child;
-                      } else {
-                        return Container(
-                          width: size.width,
-                          height: size.height,
-                          color: Colors.white,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      }
-                    },
+      body: Stack(
+        children: [
+          SizedBox(
+            height: size.height,
+            width: size.width,
+            child: Image.asset(
+              'assets/i_w_4.png',
+              fit: BoxFit.cover,
+              frameBuilder: (BuildContext context, Widget child, int? frame,
+                  bool wasSynchronouslyLoaded) {
+                if (wasSynchronouslyLoaded || frame != null) {
+                  return child;
+                } else {
+                  return Container(
+                    width: size.width,
+                    height: size.height,
+                    color: Colors.white,
+                    child: const Center(child: LinearProgressIndicator()),
+                  );
+                }
+              },
+            ),
+          ),
+          loginProvider.cargando
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
                   ),
-                ),
-                // Positioned.fill(
-                //   child: BackdropFilter(
-                //     filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                //     child: Container(
-                //       color: Colors.transparent,
-                //     ),
-                //   ),
-                // ),
-                Column(
-                  children: [
-                    const TopSideLeaderboard(),
-                    SizedBox(
-                      width: size.width,
-                      child: Text(
-                        'Leaderboard',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: size.height * 0.05,
-                        ),
-                      ),
-                    ),
-                    const BottomSideLeaderboard(),
-                  ],
-                ),
-              ],
-            );
-          }
-        },
+                )
+              : const LoginView(),
+
+          // FutureBuilder(
+          //   future: sourceProvider.getSources(locationProvider.locationId),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return const Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     } else if (snapshot.hasError) {
+          //       return const Center(
+          //         child: Text('Error loading data'),
+          //       );
+          //     } else {
+          //       return FadeIn(
+          //         child: Column(
+          //           children: [
+          //             const TopSideLeaderboard(),
+          //             SizedBox(
+          //               width: size.width,
+          //               child: Text(
+          //                 'Leaderboard',
+          //                 textAlign: TextAlign.center,
+          //                 style: TextStyle(
+          //                   color: Colors.white,
+          //                   fontSize: size.height * 0.05,
+          //                 ),
+          //               ),
+          //             ),
+          //             const BottomSideLeaderboard(),
+          //           ],
+          //         ),
+          //       );
+          //     }
+          //   },
+          // ),
+        ],
       ),
     );
   }

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:leaderboard/src/login/provider/login_provider.dart';
+import 'package:leaderboard/src/preferences/user_preferences.dart';
 import 'package:leaderboard/src/providers/change_location_provider.dart';
 import 'package:leaderboard/src/providers/data_controller.dart';
 import 'package:leaderboard/src/view/home_view.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = UserPreferences();
+  await prefs.initPrefs();
   runApp(const MyApp());
 }
 
@@ -23,6 +29,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<DataController>(
           create: (BuildContext context) => DataController(),
+        ),
+        ChangeNotifierProvider<LoginProvider>(
+          create: (BuildContext context) => LoginProvider(),
         ),
       ],
       child: MaterialApp(
