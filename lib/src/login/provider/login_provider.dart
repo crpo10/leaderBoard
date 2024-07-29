@@ -33,7 +33,8 @@ class LoginProvider extends ChangeNotifier {
 
       _errorMessage = null;
 
-      print(resp);
+      print(resp.data['access_token']);
+      _prefs.setToken(resp.data['access_token']);
       setCargando = false;
     } on DioException catch (e) {
       setCargando = false;

@@ -35,28 +35,28 @@ class _TopSideLeaderboardState extends State<TopSideLeaderboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        location.previousLocation();
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      location.location,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        location.nextLocation();
-                      },
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      ),
-                    )
+                    // InkWell(
+                    //   onTap: () {
+                    //     location.previousLocation();
+                    //   },
+                    //   child: const Icon(
+                    //     Icons.arrow_back_ios,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
+                    // Text(
+                    //   location.location,
+                    //   style: const TextStyle(color: Colors.white),
+                    // ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     location.nextLocation();
+                    //   },
+                    //   child: const Icon(
+                    //     Icons.arrow_forward_ios,
+                    //     color: Colors.white,
+                    //   ),
+                    // )
                   ],
                 ),
               ),

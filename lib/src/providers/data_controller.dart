@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:leaderboard/src/data/source_static_data.dart';
 import 'package:leaderboard/src/models/source_model.dart';
 import 'package:leaderboard/src/models/sources_model.dart';
+import 'package:leaderboard/src/preferences/user_preferences.dart';
 
 class DataController with ChangeNotifier {
   final _dio = Dio();
   List<SourceModel> allSources = [];
+  final _prefs = UserPreferences();
 
   final List<SourceModel> _firstSources = [];
   final List<SourceModel> _secondSources = [];
@@ -35,15 +37,12 @@ class DataController with ChangeNotifier {
     try {
       final response = await _dio.post('http://localhost:3000/sources/filter/',
           options: Options(
-            headers: {
-              'Authorization':
-                  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIxOTIzNTczLCJleHAiOjE3MjIwMDk5NzN9.1gy-MSzVQUdZRQYwRNTxdQq7oC6fVQllMyONv76lG1E'
-            },
+            headers: {'Authorization': 'Bearer ${_prefs.token}'},
           ),
           data: {
             "startDate": "2024/06/01",
             "endDate": "2024/07/30",
-            "officeId": officeID
+            "officeId": 1
           });
 
       allSources = sourcesFromJson(jsonEncode(response.data));

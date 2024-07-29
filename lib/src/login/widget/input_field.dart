@@ -6,12 +6,14 @@ class InputField extends StatelessWidget {
       this.isPassword = false,
       required this.hintText,
       required this.controller,
-      this.validator});
+      this.validator,
+      this.onFieldSubmitted});
 
   final bool isPassword;
   final String hintText;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final String? Function(String?)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class InputField extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        onFieldSubmitted: onFieldSubmitted,
         validator: validator,
         controller: controller,
         obscureText: isPassword,

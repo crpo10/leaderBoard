@@ -73,6 +73,14 @@ class _LoginViewState extends State<LoginView> {
               controller: _passwordController,
               isPassword: true,
               hintText: 'Password',
+              onFieldSubmitted: (value) {
+                if (_globalKey.currentState?.validate() ?? false) {
+                  loginProvider.login(
+                    _userController.text,
+                    _passwordController.text,
+                  );
+                }
+              },
             ),
             const Gap(20),
             Container(
