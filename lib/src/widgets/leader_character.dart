@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:ui' as ui;
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -38,13 +42,25 @@ class LeaderCharacter extends StatelessWidget {
                   height: size.height * 0.04,
                 ),
           const Gap(5),
-          SizedBox(
-            height: size.height * 0.13,
-            width: size.width * 0.13,
-            child: Image.asset(
-              'assets/no_user.png',
-              filterQuality: FilterQuality.high,
-              fit: BoxFit.contain,
+          Center(
+            child: ClipOval(
+              child: SizedBox(
+                height: size.height * 0.13,
+                width: size.height * 0.13,
+                child: CachedNetworkImage(
+                  imageUrl: source.photo,
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/no_user.png',
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
           ),
           const Gap(5),
@@ -165,50 +181,6 @@ class _FirstPlaceNameState extends State<FirstPlaceName>
             ),
           ),
         ),
-        // Positioned(
-        //   top: 5,
-        //   right: 80,
-        //   child: AnimatedBuilder(
-        //     animation: _floatAnimation2,
-        //     builder: (context, child) {
-        //       return Transform.translate(
-        //         offset: Offset(0, _floatAnimation2.value),
-        //         child: child,
-        //       );
-        //     },
-        //     child: SizedBox(
-        //       width: 10,
-        //       height: 10,
-        //       child: SvgPicture.asset(
-        //         'assets/star-solid.svg',
-        //         colorFilter:
-        //             const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Positioned(
-        //   top: 10,
-        //   left: 70,
-        //   child: AnimatedBuilder(
-        //     animation: _floatAnimation,
-        //     builder: (context, child) {
-        //       return Transform.translate(
-        //         offset: Offset(0, _floatAnimation.value),
-        //         child: child,
-        //       );
-        //     },
-        //     child: SizedBox(
-        //       width: 10,
-        //       height: 10,
-        //       child: SvgPicture.asset(
-        //         'assets/star-solid.svg',
-        //         colorFilter:
-        //             const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leaderboard/src/models/sources_model.dart';
 
@@ -11,8 +12,9 @@ class SourceDataTable extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return DataTable(
+      // dataRowMaxHeight: size.height * 0.07,
       horizontalMargin: 0,
-      dividerThickness: 0.5,
+      dividerThickness: 0.1,
       columns: const <DataColumn>[
         DataColumn(
           label: Expanded(
@@ -82,12 +84,26 @@ class SourceDataTable extends StatelessWidget {
             DataCell(
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2),
-                child: SizedBox(
-                  width: size.width * 0.05,
-                  child: Image.asset(
-                    'assets/no_user.png',
-                    filterQuality: FilterQuality.high,
-                    fit: BoxFit.contain,
+                child: Center(
+                  child: ClipOval(
+                    child: SizedBox(
+                      height: size.height * 0.05,
+                      width: size.height * 0.05,
+                      child: CachedNetworkImage(
+                        imageUrl: source.photo,
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit
+                            .cover, // Asegurarse de que la imagen cubra completamente el área
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/no_user.png',
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

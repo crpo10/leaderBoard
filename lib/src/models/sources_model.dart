@@ -20,6 +20,7 @@ class SourceModel {
   TeamSource teamSource;
   Position position;
   int leadCount;
+  String photo;
   int place;
 
   SourceModel({
@@ -32,6 +33,7 @@ class SourceModel {
     required this.teamSource,
     required this.position,
     required this.leadCount,
+    required this.photo,
     required this.place,
   });
 
@@ -45,6 +47,7 @@ class SourceModel {
         teamSource: TeamSource.fromJson(json["teamSource"]),
         position: Position.fromJson(json["position"]),
         leadCount: json["leadCount"],
+        photo: json["photo"],
         place: json["place"],
       );
 
@@ -58,6 +61,7 @@ class SourceModel {
         "teamSource": teamSource.toJson(),
         "position": position.toJson(),
         "leadCount": leadCount,
+        "photo": photo,
         "place": place,
       };
 }
