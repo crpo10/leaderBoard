@@ -90,7 +90,7 @@ class SourceDataTable extends StatelessWidget {
                       height: size.height * 0.05,
                       width: size.height * 0.05,
                       child: CachedNetworkImage(
-                        imageUrl: source.photo,
+                        imageUrl: source.iconPhoto ?? '',
                         filterQuality: FilterQuality.high,
                         fit: BoxFit
                             .cover, // Asegurarse de que la imagen cubra completamente el área

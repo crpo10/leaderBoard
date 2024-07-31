@@ -45,7 +45,7 @@ class DataController with ChangeNotifier {
             "officeId": 1
           });
 
-      allSources = sourcesFromJson(jsonEncode(response.data));
+      allSources = sourceModelFromJson(jsonEncode(response.data));
       assignDataToEachList();
       return allSources;
     } on DioException catch (e) {

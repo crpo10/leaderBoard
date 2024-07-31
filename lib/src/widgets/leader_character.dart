@@ -48,7 +48,7 @@ class LeaderCharacter extends StatelessWidget {
                 height: size.height * 0.13,
                 width: size.height * 0.13,
                 child: CachedNetworkImage(
-                  imageUrl: source.photo,
+                  imageUrl: source.largePhoto ?? '',
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => const Center(
